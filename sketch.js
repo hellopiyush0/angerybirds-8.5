@@ -94,24 +94,34 @@ function mouseReleased(){
 
 function keyPressed(){
     if(keyCode === 32){
-       slingshot.attach(bird.body);
+
+        bird.trajectory = [];
+        Matter.Body.setPosition(bird.body, {x: 200, y: 50});
+        slingshot.attach(bird.body);
+
     }
 }
 
 async function getBackgroundImg(){
+
     var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
     var responseJSON = await response.json();
 
     var datetime = responseJSON.datetime;
     var hour = datetime.slice(11,13);
     
-    if(hour>=0600 && hour<=1900){
+    if(hour>=06 && hour<=19){
+
         bg = "sprites/bg1.png";
+
     }
     else{
+
         bg = "sprites/bg2.jpg";
+
     }
 
     backgroundImg = loadImage(bg);
     console.log(backgroundImg);
+
 }
